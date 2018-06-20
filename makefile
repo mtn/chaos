@@ -1,0 +1,2 @@
+run:
+	bootimage run
