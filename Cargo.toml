@@ -6,6 +6,7 @@ authors = ["Michael Noronha <michaeltnoronha@gmail.com>"]
 [dependencies]
 volatile = "0.2.4"
 spin = "0.4.8"
+array-init = "0.0.3"
 
 [package.metadata.bootimage]
 default-target = "chaos.json"
