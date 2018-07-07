@@ -8,6 +8,7 @@ volatile = "0.2.4"
 spin = "0.4.8"
 array-init = "0.0.3"
 uart_16550 = "0.1.0"
+x86_64 = "0.2.7"
 
 [package.metadata.bootimage]
 default-target = "chaos.json"
@@ -15,3 +16,6 @@ default-target = "chaos.json"
 [dependencies.lazy_static]
 version = "1.0"
 features = ["spin_no_std"]
+
+[features]
+integration-test = []

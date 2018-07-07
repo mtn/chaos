@@ -100,7 +100,7 @@ impl Writer {
         self.column_position = 0;
     }
 
-    // Overwrite all characters in the row with a space
+    /// Overwrite all characters in the row with a space
     fn clear_row(&mut self, row: usize) {
         let blank = ScreenChar {
             ascii_character: b' ',
@@ -128,10 +128,12 @@ lazy_static! {
     });
 }
 
+#[macro_export]
 macro_rules! print {
     ($($arg:tt)*) => ($crate::vga_buffer::print(format_args!($($arg)*)));
 }
 
+#[macro_export]
 macro_rules! println {
     () => (print!("\n"));
     ($fmt:expr) => (print!(concat!($fmt, "\n")));
