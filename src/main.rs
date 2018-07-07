@@ -9,14 +9,16 @@ extern crate std;
 extern crate volatile;
 #[macro_use]
 extern crate lazy_static;
-extern crate spin;
 #[cfg(test)]
 extern crate array_init;
+extern crate spin;
+extern crate uart_16550;
 
 use core::panic::PanicInfo;
 
 #[macro_use]
 mod vga_buffer;
+mod serial;
 
 #[cfg(not(test))]
 #[panic_implementation]

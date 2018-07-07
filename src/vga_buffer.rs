@@ -1,6 +1,6 @@
-use volatile::Volatile;
 use core::fmt;
 use spin::Mutex;
+use volatile::Volatile;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -24,7 +24,7 @@ pub enum Color {
     White = 15,
 }
 
-#[derive (Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 struct ColorCode(u8);
 
 impl ColorCode {
@@ -33,7 +33,7 @@ impl ColorCode {
     }
 }
 
-#[derive (Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(C)]
 struct ScreenChar {
     ascii_character: u8,
@@ -41,11 +41,11 @@ struct ScreenChar {
 }
 
 const BUFFER_HEIGHT: usize = 25;
-const BUFFER_WIDTH : usize = 80;
+const BUFFER_WIDTH: usize = 80;
 
 struct Buffer {
     // Volatile wrapper ensures write isn't optimized away
-    chars: [[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT]
+    chars: [[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
 
 pub struct Writer {
@@ -92,7 +92,7 @@ impl Writer {
         for row in 1..BUFFER_HEIGHT {
             for col in 0..BUFFER_WIDTH {
                 let character = self.buffer.chars[row][col].read();
-                self.buffer.chars[row-1][col].write(character);
+                self.buffer.chars[row - 1][col].write(character);
             }
         }
 
@@ -187,7 +187,7 @@ mod test {
                 if i == BUFFER_HEIGHT - 1 && j == 0 {
                     assert_eq!(screen_char.ascii_character, b'X');
                     assert_eq!(screen_char.color_code, writer.color_code);
-                } else if i == BUFFER_HEIGHT -1 && j == 1 {
+                } else if i == BUFFER_HEIGHT - 1 && j == 1 {
                     assert_eq!(screen_char.ascii_character, b'Y');
                     assert_eq!(screen_char.color_code, writer.color_code);
                 } else {
